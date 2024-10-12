@@ -25,6 +25,7 @@ const TicketForm = () => {
   const [locationId, setLocationId] = useState(null);
   const navigate = useNavigate();
 
+
   const onDrop = (acceptedFiles) => {
     setFormData({
       ...formData,
@@ -51,7 +52,7 @@ const TicketForm = () => {
     // Handle form submission logic, e.g., sending data to the backend
     console.log('Form data submitted:', formData);
     try {
-    const response = await axios.patch(`${baseURL}/apis/ticket/${ticketId}/`, {
+    const response = await axios.patch(`${baseURL}/apis/ticketupdate/${ticketId}/`, {
     "ticketid":ticketId,
     "issuestatus":"OPEN",
     "createdDate":createdDate,
