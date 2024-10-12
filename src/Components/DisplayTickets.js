@@ -56,7 +56,7 @@ const TicketForm = () => {
 
   const handleViewTicket=(e, ticket)=>{
     e.preventDefault();
-    navigate('/viewTicket', {state :{ticketId:ticket.ticketid,locationId:ticket.locationid,furnitureId:ticket.furnitureid,issueStatus: ticket.issuestatus,createdBy: ticket.reportedby,createdDate: ticket.createddate, issueDesc:ticket.issuedescription}})
+    navigate('/viewTicket', {state :{ticketId:ticket.ticketid,locationId:ticket.locationid,furnitureId:ticket.furnitureid,issueStatus: ticket.issuestatus,createdBy: ticket.reportedby,createdDate: ticket.createddate, issueDesc:ticket.issuedescription, resolutionType:ticket.resolutiontype, resolutionComments:ticket.resolutioncomments, resolutionDate:ticket.resolutiondate}})
   
   }
 

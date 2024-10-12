@@ -7,12 +7,14 @@ import { Container, Form, Row, Col, Button, Modal, ListGroup } from 'react-boots
 import {baseURL} from './constants';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ResolveTicket = () => {
   const [error, setError] = useState([]);
   const [resolutionType, setResolutionType] = useState(null);
   const [resolutionDate, setResolutionDate] = useState(null);
   const [resolutionComments, setResolutionComments] = useState(null);
+  const navigate = useNavigate();
   const location = useLocation();
   console.log(location.state,"location")
   const { furnitureId, ticketId, locationId, createdBy, createdDate, issueStatus, issueDesc} = location.state || {};
@@ -20,37 +22,28 @@ const ResolveTicket = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     // Handle form submission logic, e.g., sending data to the backend
-//     try {
-//     const response = await axios.patch(`${baseURL}/apis/ticket/${ticketId}/`, {
-//     "ticketid":ticketId,
-//     "issuestatus":issueStatus,
-//     "createdDate":createdDate,
-//     "reportedby": createdBy,
-//     "issuedescription": "Paint peeling on Chair",
-//     "issuedescription":issueDesc,
-//     "resolutiontype": null,
-//     "resolutioncomments": null,
-//     "resolutiondate": null,
-//     "lastupdateddate": null,
-//     "furnitureid": furnitureId,
-//     "locationid": 1
-// });
+     try {
+     const response = await axios.patch(`${baseURL}/apis/ticket/${ticketId}/`, {
+     "ticketid":ticketId,
+     "resolutiontype": resolutionType,
+     "resolutioncomments": resolutionComments,
+     "resolutiondate": resolutionDate,
+     "issuestatus":"RESOLVED"
+ });
 
-//     if (response.status === 201) {
-//       // Store the tokens in localStorage
-//       console.log("TEST",response)
-//     //   setTicketId(response.data.ticketid);
-//       setCreatedDate(response.data.createddate.split('T')[0]);
-//       setIssueStatus(response.data.issuestatus);
-//     } else {
-//       alert('Cannot Fetch Ticket ID');
-//     }
-//   } catch (error) {
-//     console.log("ERROR", error.response.data)
-//     const err = Object.keys(error.response.data).map(val=>"Field is not valid - " + val);
-//     console.log(err)
-//     setError(err); //login failure
-//   }
+     if (response.status === 200) {
+        console.log("TEST",response)
+     //   setTicketId(response.data.ticketid);
+     navigate('/DisplayTickets')
+     } else {
+       alert('Cannot Fetch Ticket ID');
+     }
+   } catch (error) {
+     console.log("ERROR", error.response.data)
+     const err = Object.keys(error.response.data).map(val=>"Field is not valid - " + val);
+     console.log(err)
+     setError(err); //login failure
+   }
   };
 
   return (

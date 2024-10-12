@@ -3,6 +3,7 @@ import Layout from './Layout';
 import axios from 'axios';
 import {baseURL} from './constants';
 import { Container, Form, Row, Col, Button, Modal, ListGroup } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const CreateUser=()=>{
     const [firstName, setFirstName] = useState('');
@@ -17,6 +18,7 @@ const CreateUser=()=>{
   const [createdDate, setCreatedDate] = useState(null);
   const [status, setStatus] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,19 +40,8 @@ const CreateUser=()=>{
     if (response.status === 201) {
       // Store the tokens in localStorage
       alert("User Saved Successfully!");
-      setConfirmPassword('');
-      setFirstName('');
-    setUserId('');
-    setUserType('');
-  setLastName('');
-  setEmail('');
-  setUserName('');
-  setPhone('');
-  setPassword('');
-  setConfirmPassword('');
-  setCreatedDate('');
-  setStatus('');
-  setError('');
+      navigate('/loginHome')
+
     } else {
       alert('User Saved has failed');
     }

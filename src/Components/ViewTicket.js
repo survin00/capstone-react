@@ -10,12 +10,9 @@ import { useLocation } from 'react-router-dom';
 
 const ResolveTicket = () => {
   const [error, setError] = useState([]);
-  const [resolutionType, setResolutionType] = useState(null);
-  const [resolutionDate, setResolutionDate] = useState(null);
-  const [resolutionComments, setResolutionComments] = useState(null);
   const location = useLocation();
   console.log(location.state,"location")
-  const { furnitureId, ticketId, locationId, createdBy, createdDate, issueStatus, issueDesc} = location.state || {};
+  const { furnitureId, ticketId, locationId, createdBy, createdDate, issueStatus, issueDesc, resolutionType, resolutionDate, resolutionComments} = location.state || {};
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -134,6 +131,39 @@ const ResolveTicket = () => {
             </Form.Group>
           </Col>
         </Row>
+        <Row className="mb-3">
+          {/* Third input (Email) */}
+          <Col md={6}>
+            <Form.Group controlId="resolutionType">
+              <Form.Label>Resolutin Type</Form.Label>
+              <div className="form-control-lg" style={{ backgroundColor: '#f8f9fa', padding: '10px', border: '1px solid #ced4da', borderRadius: '.25rem' }}>
+    {resolutionType || 'N/A'}
+  </div>
+            </Form.Group>
+          </Col>
+
+          {/* Fourth input (Phone) */}
+          <Col md={6}>
+            <Form.Group controlId="resolutionDate">
+              <Form.Label>Resolution Date</Form.Label>
+              <div className="form-control-lg" style={{ backgroundColor: '#f8f9fa', padding: '10px', border: '1px solid #ced4da', borderRadius: '.25rem' }}>
+    {resolutionDate.split('T')[0] || 'N/A'}
+  </div>
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          {/* Third input (Issue Description) */}
+          <Col md={12}>
+            <Form.Group controlId="resolutionComments">
+              <Form.Label>Resolution Comments</Form.Label>
+              <div className="form-control-lg" style={{ backgroundColor: '#f8f9fa', padding: '10px', border: '1px solid #ced4da', borderRadius: '.25rem' }}>
+    {resolutionComments || 'N/A'}
+  </div>
+            </Form.Group>
+          </Col>
+        </Row>
+
       </Form>
     </Container>
 
